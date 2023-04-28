@@ -19,6 +19,7 @@ node {
     sh "cat nginx.yaml | grep image:"
     sh "git add ."
     sh "git commit -m 'image tag update ${env.BUILD_NUMBER}'"
+    sh "git pull origin master"
     sh "git push -u origin master"
   }
 }
