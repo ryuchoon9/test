@@ -3,6 +3,7 @@ node {
     checkout scm
   }
   stage('======== Build image ========') {
+    sh "git switch master"
     sh "git config --global user.email 'shryu@cloit.com'"
     sh "git config --global user.name 'shryu'"
     sh "git pull origin master"
@@ -19,7 +20,6 @@ node {
     sh "cat nginx.yaml | grep image:"
     sh "git add ."
     sh "git commit -m 'image tag update ${env.BUILD_NUMBER}'"
-    sh "git pull origin master"
     sh "git push -u origin master"
   }
 }
