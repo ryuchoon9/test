@@ -9,7 +9,7 @@ node {
     app = docker.build("shryu1/test")
   }
   stage('======== Push image ========') {
-    docker.withRegistry('https://hub.docker.com/r/shryu1/test', 'docker') {
+    docker.withRegistry('', 'docker') {
        app.push("${env.BUILD_NUMBER}")
        app.push("latest")
     }
