@@ -3,9 +3,9 @@ node {
     checkout scm
   }
   stage('======== Build image ========') {
-    sh "git pull origin master"
     sh "git config --global user.email 'shryu@cloit.com'"
     sh "git config --global user.name 'shryu'"
+    sh "git pull origin master"
     app = docker.build("shryu1/test")
   }
   stage('======== Push image ========') {
@@ -15,6 +15,8 @@ node {
     }
   }
   stage('======== Update YAML file ========') {
+    sh "git config --global user.email 'shryu@cloit.com'"
+    sh "git config --global user.name 'shryu'"
     sh "git pull origin master"
     sh "sed -i s%shryu1/test:.*%shryu1/test:${env.BUILD_NUMBER}%g nginx.yaml"
     sh "cat nginx.yaml | grep image:"
