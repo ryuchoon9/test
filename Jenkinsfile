@@ -3,7 +3,9 @@ node {
     checkout scm
   }
   stage('======== Build image ========') {
-    sh "git pull"
+    sh "git pull origin master"
+    sh "git config --global user.email 'shryu@cloit.com'"
+    sh "git config --global user.name 'shryu'"
     app = docker.build("shryu1/test")
   }
   stage('======== Push image ========') {
