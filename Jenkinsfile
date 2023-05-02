@@ -16,11 +16,13 @@ node {
     }
   }
   stage('======== Update YAML file ========') {
+    sh "git switch yaml"
+    sh "git pull origin yaml"
     sh "sed -i s%shryu1/test:.*%shryu1/test:${env.BUILD_NUMBER}%g nginx.yaml"
     sh "cat nginx.yaml | grep image:"
     sh "git add ."
     sh "git commit -m 'image tag update ${env.BUILD_NUMBER}'"
-    sh "git push -u origin master"
+    sh "git push -u origin yaml"
   }
 }
 
